@@ -9,4 +9,4 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
       - name: run a sample
-      - run: echo Hello, world!
+      - run: echo 'Hello, world!'
