@@ -15,3 +15,13 @@ jobs:
         with:
           name: build-artifact
           path: ${{ github.workspace }}
+
+      # Assuming you want to deploy here, add your deploy logic:
+      - name: deploy
+        run: echo "Deploying the application..."  # replace with actual deployment command
+
+      - uses: actions/download-artifact@v2
+        name: download artifact
+        with:
+          name: build-artifact
+          path: ./downloaded-artifacts
