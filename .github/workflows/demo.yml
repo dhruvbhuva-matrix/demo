@@ -1,27 +1,31 @@
-name: demo action121
-on:
-  workflow_dispatch:
-jobs:
-  build:    
-    runs-on: ubuntu-latest
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-      - name: run a sample
-        run: echo "Hello, world!"
+name: demo-action
 
-      - uses: actions/upload-artifact@v4
-        name: upload artifact
+on:
+  #   push:
+  #     branches: 
+  #       - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v4
+      - name: Run as sample job
+        run: echo "hello world!"
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
         with:
           name: build-artifact
           path: ${{ github.workspace }}
 
-      # Assuming you want to deploy here, add your deploy logic:
-      - name: deploy
-        run: echo "Deploying the application..."  # replace with actual deployment command
-
-      - uses: actions/download-artifact@v2
-        name: download artifact
+  deploy:     
+    runs-on: ubuntu-latest
+    needs: build  # Ensures 'deploy' runs after 'build' completes successfully
+    steps:    
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
         with:
           name: build-artifact
           path: ./downloaded-artifacts
