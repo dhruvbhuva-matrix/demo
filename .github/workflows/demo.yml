@@ -1,7 +1,5 @@
 name: demo action121
 on:
-#  push:
-#    branches: master
   workflow_dispatch:
 jobs:
   build:    
@@ -13,8 +11,7 @@ jobs:
         run: echo "Hello, world!"
 
       - uses: actions/upload-artifact@v4
-      - name: upload artifect
+        name: upload artifact
         with:
           name: build-artifact
-          path: ${{github.workpace}}
-  
+          path: ${{ github.workspace }}
